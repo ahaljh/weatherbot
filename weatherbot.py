@@ -39,6 +39,11 @@ if __name__ == '__main__':
              '정자1동': 'http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4113555000',
              }  # 이건 그냥 하드코딩으로 두자.
 
+    print(sys.argv)
+    print(len(sys.argv))
+    for a in sys.argv:
+        print(a)
+
     slack_webhook_url = sys.argv[1]
     slack_channel_name = sys.argv[2]
 
