@@ -1,0 +1,40 @@
+class Weather:
+    """
+    날씨 예보 모음
+    """
+
+    forecasts = []
+
+    class Forecast:
+        """
+        시간대별 날씨 예보
+        """
+
+        def __init__(self, from_hour, to_hour, wf_kor, temperature, precipitation) -> None:
+            self.from_hour = from_hour
+            self.to_hour = to_hour
+            self.wf_kor = wf_kor
+            self.temperature = temperature
+            self.precipitation = precipitation
+
+        def __str__(self):
+            return f'[{self.from_hour}시~{self.to_hour}시]온도:{self.temperature}, 날씨:{self.wf_kor}, 강수확률:{self.precipitation}%'
+
+        def will_rain(self):
+            return self.precipitation >= 50
+
+    def add_forecast(self, from_hour, to_hour, wf_kor, temperature, precipitation) -> None:
+        self.forecasts.append(self.Forecast(from_hour, to_hour, wf_kor, temperature, precipitation))
+
+    def __init__(self, town) -> None:
+        self.town = town
+
+    def __str__(self):
+        return '>\n>'.join(str(fc) for fc in self.forecasts)
+
+    def forecast(self):
+        return f'>*[{self.town}] 일기예보* \n>\n>' + '\n>'.join(str(fc) for fc in self.forecasts)
+
+    def rain_forecasts(self):
+        str_forecasts = '\n>'.join(str(fc) for fc in self.forecasts if (fc.will_rain()))
+        return f'>*[{self.town}] 일기예보* \n>\n>' + str_forecasts if str_forecasts != '' else ''
