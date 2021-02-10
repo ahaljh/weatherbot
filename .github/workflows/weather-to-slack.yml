@@ -25,4 +25,4 @@ jobs:
       
       - name: Run python file
         run: |
-          python weatherbot.py $SLACK_WEBHOOK_URL $SLACK_CHANNEL_NAME
+          python weatherbot.py ${{ secrets.SLACK_WEBHOOK_URL}} ${{ secrets.SLACK_CHANNEL_NAME }}
