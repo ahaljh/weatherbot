@@ -24,5 +24,8 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       
       - name: Run python file
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_CHANNEL_NAME: ${{ secrets.SLACK_CHANNEL_NAME }}
         run: |
-          python weatherbot.py ${{ secrets.SLACK_WEBHOOK_URL}} ${{ secrets.SLACK_CHANNEL_NAME }}
+          python weatherbot.py "$SLACK_WEBHOOK_URL" "$SLACK_CHANNEL_NAME"
