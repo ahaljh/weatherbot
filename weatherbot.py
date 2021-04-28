@@ -58,7 +58,8 @@ if __name__ == '__main__':
     print(f'KST: {kst_now}')
 
     slack_webhook_url = sys.argv[1]
-    slack_channel_name = sys.argv[2]
+    slack_rainy_channel_name = sys.argv[2]
+    slack_sunny_channel_name = sys.argv[3]
 
     # print('--------------------------------------')
     # print(slack_webhook_url, slack_channel_name)
@@ -72,10 +73,10 @@ if __name__ == '__main__':
     rain_forecasts = [parse_kma_url(town_name, zone_id).rain_forecasts() for town_name, zone_id in town_info.items()]
     rain_forecasts_str = '\n\n'.join(rf for rf in rain_forecasts if rf)
 
-    slack = Slack(url=slack_webhook_url, channel=slack_channel_name, emoji=':sunny:', username='날씨 bot')
+    slack = Slack(url=slack_webhook_url, channel=slack_sunny_channel_name, emoji=':sunny:', username='날씨 bot')
     if rain_forecasts_str:
         print(rain_forecasts_str)
-        slack.send_message(f'*비 예보가 있습니다.* :umbrella: \n\n{rain_forecasts_str}')
+        slack.send_message(f'*비 예보가 있습니다.* :umbrella: \n\n{rain_forecasts_str}', channel=slack_rainy_channel_name)
     else:
         print('비 예보가 없음')
         slack.send_message('비 예보가 없음 :sunny: ')
