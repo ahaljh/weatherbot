@@ -29,12 +29,15 @@ class Weather:
     def __init__(self, town) -> None:
         self.town = town
 
+    def _make_forecast_str(self, forecasts: list):
+        return '>\n>'.join(str(fc) for fc in forecasts)
+
     def __str__(self):
-        return '>\n>'.join(str(fc) for fc in self.forecasts)
+        return self._make_forecast_str(self.forecasts)
 
     def forecast(self):
-        return f'>*[{self.town}] 일기예보* \n>\n>' + '\n>'.join(str(fc) for fc in self.forecasts)
+        return f'>*[{self.town}] 일기예보* \n>\n>' + self._make_forecast_str(self.forecasts)
 
     def rain_forecasts(self):
-        str_forecasts = '\n>'.join(str(fc) for fc in self.forecasts if (fc.will_rain()))
-        return f'>*[{self.town}] 일기예보* \n>\n>' + str_forecasts if str_forecasts != '' else ''
+        str_rain_forecasts = self._make_forecast_str(fc for fc in self.forecasts if fc.will_rain())
+        return f'>*[{self.town}] 일기예보* \n>\n>' + str_rain_forecasts if str_rain_forecasts else ''
