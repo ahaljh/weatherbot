@@ -16,10 +16,11 @@ class Slack:
         """Slack에 Webhook 방식으로 메시지를 전송합니다."""
         payload = {'text': text}
 
-        payload['channel'] = self.channel if channel == '' else channel
-        payload['icon_emoji'] = self.emoji if emoji == '' else emoji
-        payload['username'] = self.username if username == '' else username
+        payload['channel'] = channel if channel else self.channel
+        payload['icon_emoji'] = emoji if emoji else self.emoji
+        payload['username'] = username if username else self.username
 
-        requests.post(url if url != '' else self.url,
-                      json=payload
-                      )
+        requests.post(
+            url if url else self.url,
+            json=payload
+        )
