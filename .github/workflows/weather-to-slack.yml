@@ -26,6 +26,7 @@ jobs:
       - name: Run python file
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_CHANNEL_NAME: ${{ secrets.SLACK_CHANNEL_NAME }}
+          SLACK_RAINY_CHANNEL_NAME: ${{ secrets.SLACK_RAINY_CHANNEL_NAME }}
+          SLACK_SUNNY_CHANNEL_NAME: ${{ secrets.SLACK_SUNNY_CHANNEL_NAME }}
         run: |
-          python weatherbot.py "$SLACK_WEBHOOK_URL" "$SLACK_CHANNEL_NAME"
+          python weatherbot.py "$SLACK_WEBHOOK_URL" "$SLACK_RAINY_CHANNEL_NAME" "$SLACK_SUNNY_CHANNEL_NAME"
