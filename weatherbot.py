@@ -2,8 +2,8 @@ import requests
 import sys
 import xml.etree.ElementTree as elemTree
 from datetime import datetime, timezone, timedelta
-from weather import Weather
-from slack import Slack
+from ahaljh.weather import Weather
+from ahaljh.slack import Slack
 
 
 def parse_kma_url(name, zone_id):
