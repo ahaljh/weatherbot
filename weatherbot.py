@@ -59,7 +59,7 @@ if __name__ == '__main__':
 
     slack_webhook_url = sys.argv[1]
     slack_rainy_channel_name = sys.argv[2]
-    slack_sunny_channel_name = sys.argv[3]
+    slack_sunny_channel_name = sys.argv[3] if len(sys.argv) > 3 else sys.argv[2]
 
     # print('--------------------------------------')
     # print(slack_webhook_url, slack_channel_name)
